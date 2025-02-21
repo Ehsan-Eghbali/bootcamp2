@@ -2,34 +2,31 @@ package main
 
 import (
 	"fmt"
-	"sync"
+	"runtime"
+	"time"
 )
 
-var count int
-
 func main() {
-	//mu := new(sync.Mutex)
-	//for i := 0; i < 1000; i++ {
-	//	go addNumber(mu)
+	a := runtime.GOMAXPROCS(2)
+	go helloName("ehsan")
+	fmt.Println("Hello World")
+	time.Sleep(1 * time.Second)
+	fmt.Println(a)
+	//lion := new(port.Lion)
+	//lion.Name = "Lion"
+	//lion.Age = 12
+	//
+	//cat := port.Cat{
+	//	Name: "Cat",
 	//}
-	//fmt.Println(count)
-
-	var wg sync.WaitGroup
-	for i := 0; i < 1000; i++ {
-		wg.Add(2)
-		go addNumber(&wg)
-		wg.Wait()
-	}
-	fmt.Println(count)
+	//fmt.Println(lion)
+	//fmt.Println(&cat)
+	//fmt.Println(GetNameAnimal(lion))
+}
+func helloName(name string) {
+	fmt.Println("Hello " + name)
 }
 
-//	func addNumber(mu *sync.Mutex) {
-//		mu.Lock()
-//		//defer mu.Unlock()
-//		count++
-//		mu.Unlock()
-//	}
-func addNumber(wg *sync.WaitGroup) {
-	defer wg.Done()
-	count++
-}
+//func GetNameAnimal(animal port.Animal) string {
+//	return animal.GetName()
+//}
