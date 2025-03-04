@@ -1,17 +1,12 @@
 package bootstrap
 
 import (
-	"bootcamp2/repo"
-	"fmt"
+	"bootcamp2/internal/core/service"
+	"bootcamp2/internal/presentation/handler"
+	"context"
 )
 
-func InitApplication() {
-	person := repo.Person{}
-	person.SetName("John Doe")
-	//person.GetType()
-	fmt.Println(person.GetName())
-
-	owl := new(repo.Animal)
-	owl.SetType("owl")
-	fmt.Println(owl.GetType())
+func Initiate(ctx context.Context) {
+	taskSRV := service.NewTaskService()
+	handler.Register(taskSRV)
 }
